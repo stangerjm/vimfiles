@@ -1,5 +1,20 @@
+" vim-plug
+call plug#begin('~/.vim/plugged')
 
+" plugin section
 
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+
+Plug 'flrnprz/plastic.vim'
+
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+
+" end vim-plug
+call plug#end()
+
+let g:vim_jsx_pretty_colorful_config = 1
 
 " Show number lines
 set number
@@ -22,3 +37,18 @@ set undoreload=10000
 
 " Use syntax highlighting
 syntax on
+
+" " Use all colors and set background to dark
+set t_Co=256
+set background=dark
+
+" " Plastic
+" colorscheme plastic
+" let g:lightline = { 'colorscheme': 'plastic' }
+
+colorscheme onehalfdark 
+let g:airline_theme='onehalfdark'
+
+" Ensure Background highlighting works as expected
+:set t_ut=""
+
