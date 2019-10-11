@@ -3,14 +3,16 @@ call plug#begin('~/.vim/plugged')
 
 " plugin section
 
+" Syntax highlighting
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 
+" Themes
 Plug 'flrnprz/plastic.vim'
-
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
+" JavaScript autocomlete
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -21,10 +23,18 @@ endif
 
 let g:deoplete#enable_at_startup = 1
 
+" File Explorer
+Plug 'scrooloose/nerdtree'
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
+
 " end vim-plug
 call plug#end()
 
 let g:vim_jsx_pretty_colorful_config = 1
+
+set encoding=UTF-8
 
 " Show number lines
 set number
