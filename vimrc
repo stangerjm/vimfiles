@@ -23,19 +23,32 @@ endif
 
 let g:deoplete#enable_at_startup = 1
 
-" File Explorer
+" File explorer
 Plug 'scrooloose/nerdtree'
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 
-" File Finder
+" File finder
 Plug 'ctrlpvim/ctrlp.vim'
 set runtimepath^=~/.vim/plugged/ctrlp.vim
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Status bar
 Plug 'vim-airline/vim-airline'
+
+" Enable TypeScript features
+Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
+Plug 'Quramy/tsuquyomi'
+
+" Enable syntax checking
+Plug 'vim-syntastic/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " end vim-plug
 call plug#end()
