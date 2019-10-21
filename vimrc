@@ -128,3 +128,6 @@ set tabstop=2 softtabstop=2 expandtab shiftwidth=2
 set autoindent
 set shiftround
 set smarttab
+
+" Reflect file name in window title
+set title
