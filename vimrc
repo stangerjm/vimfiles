@@ -132,9 +132,15 @@ set smarttab
 " Reflect file name in window title
 set title
 
-" Store swap files in a separate directory
-set dir=~/.cache/vim
-
 " Increase undo limit
 set history=1000
+
+" Store swap files in a separate directory
+set directory^=$HOME/.vim/tmp//
+
+" Highlight line cursor is on
+set cursorline
+
+" Don't rerender editor if unecessary
+set lazyredraw
 
