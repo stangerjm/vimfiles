@@ -147,3 +147,10 @@ set lazyredraw
 " Show matching paren, curly brace, or brackets when cursor moves over
 set showmatch
 
+" Vertical movements should not skip wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" highlight last inserted text
+nnoremap gV `[v`]
+
