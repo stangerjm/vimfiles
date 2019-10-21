@@ -1,5 +1,6 @@
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-pip3 install --user pynvim
+sudo npm -g install neovim
+sudo npm -g install typescript
 
 vim +PlugInstall +qall
