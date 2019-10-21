@@ -131,3 +131,10 @@ set smarttab
 
 " Reflect file name in window title
 set title
+
+" Store swap files in a separate directory
+set dir=~/.cache/vim
+
+" Increase undo limit
+set history=1000
+
