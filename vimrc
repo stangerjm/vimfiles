@@ -72,9 +72,6 @@ set number
 " Map the space key to a command that clears the previous search
 :map <SPACE> :let @/=""<CR>
 
-" Use 2 spaces instead of tabs
-set tabstop=2 softtabstop=2 expandtab shiftwidth=2
-
 " Persist undo even when exiting Vim
 set undodir=~/.vim/undodir
 set undofile
@@ -125,3 +122,9 @@ nnoremap <Right> <C-w>l
 nnoremap <Left> <C-w>h
 nnoremap <Up> <C-w>k
 nnoremap <Down> <C-w>j
+
+" Indentation
+set tabstop=2 softtabstop=2 expandtab shiftwidth=2
+set autoindent
+set shiftround
+set smarttab
