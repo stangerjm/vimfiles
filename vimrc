@@ -144,3 +144,6 @@ set cursorline
 " Don't rerender editor if unecessary
 set lazyredraw
 
+" Show matching paren, curly brace, or brackets when cursor moves over
+set showmatch
+
