@@ -37,8 +37,11 @@ let g:nerdtree_tabs_open_on_console_startup = 1
 " File finder
 Plug 'ctrlpvim/ctrlp.vim'
 set runtimepath^=~/.vim/plugged/ctrlp.vim
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Status bar
 Plug 'vim-airline/vim-airline'
@@ -57,6 +60,9 @@ Plug 'junegunn/fzf.vim'
 
 " end vim-plug
 call plug#end()
+
+" Remap leader
+let mapleader=","
 
 let g:vim_jsx_pretty_colorful_config = 1
 
@@ -153,4 +159,7 @@ nnoremap k gk
 
 " highlight last inserted text
 nnoremap gV `[v`]
+
+" Quick open Ag
+nnoremap <leader>a :Ag
 

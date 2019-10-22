@@ -1,2 +1,6 @@
 autoload/*
 plugged/*
+.git*
+!.gitignore
+*.swp
+.netrwhist
