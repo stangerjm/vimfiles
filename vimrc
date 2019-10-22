@@ -47,8 +47,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 Plug 'vim-airline/vim-airline'
 
 " TypeScript checking and TSLint
-Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', { 'branch' : 'release', 'do' : './plugged/coc.nvim/install.sh' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Quramy/tsuquyomi'
 let g:tsuquyomi_disable_quickfix = 1
