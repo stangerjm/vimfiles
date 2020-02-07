@@ -1,5 +1,6 @@
 autoload/*
 plugged/*
+undodir/*
 .git*
 !.gitignore
 *.swp
