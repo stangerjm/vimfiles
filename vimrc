@@ -147,7 +147,7 @@ set number
 :set incsearch
 :set hlsearch
 
-" Map the space key to a command that clears the previous search
+" Map the ',' key to a command that clears the previous search
 :map , :let @/=""<CR>
 
 " Use syntax highlighting
@@ -256,3 +256,6 @@ nnoremap <leader>t :tabonly<CR>
 
 nnoremap <leader>y "*y
 nnoremap <leader>p "*p
+
+set guicursor=a:ver50-blinkon1
+au VimLeave * set guicursor=a:ver50-blinkon1
