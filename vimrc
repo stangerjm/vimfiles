@@ -19,6 +19,7 @@ Plug 'jparise/vim-graphql'
 " File explorer
 Plug 'scrooloose/nerdtree'
 let NERDTreeShowHidden = 1
+let g:NERDTreeWinSize=70
 
 " Git integration
 Plug 'tpope/vim-fugitive'
@@ -47,7 +48,7 @@ endfunction
 " JavaScript / TypeScript features / tools
 if has('nvim')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json']
+  let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-spell-checker']
   autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
@@ -62,6 +63,8 @@ if has('nvim')
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  vmap <leader>s <Plug>(coc-codeaction-selected)
+  nmap <leader>s <Plug>(coc-codeaction-selected)
 
   function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
@@ -131,6 +134,9 @@ let g:mkdp_browserfunc = 'g:EchoUrl'
 let g:mkdp_auto_start = 1
 let g:mkdp_auto_close = 1
 let g:mkdp_page_title = '${name}'
+
+" Better VIM Movement
+Plug 'chaoren/vim-wordmotion'
 
 " (MUST BE AT END) Enable icons for file explorer
 Plug 'ryanoasis/vim-devicons'
@@ -259,3 +265,8 @@ nnoremap <leader>p "*p
 
 set guicursor=a:ver50-blinkon1
 au VimLeave * set guicursor=a:ver50-blinkon1
+
+set updatetime=300
+
+" Make sure the popup window is a nice color that doesn't hide any characters
+highlight Pmenu ctermbg=gray guibg=gray
