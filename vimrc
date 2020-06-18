@@ -269,4 +269,4 @@ au VimLeave * set guicursor=a:ver50-blinkon1
 set updatetime=300
 
 " Make sure the popup window is a nice color that doesn't hide any characters
-highlight Pmenu ctermbg=gray guibg=gray
+highlight Pmenu ctermbg=DarkGray guibg=gray

@@ -8,6 +8,7 @@ then
     sudo mkdir -m 0755 /nix && sudo chown $USER /nix
     curl https://nixos.org/nix/install | sh
     source $HOME/.nix-profile/etc/profile.d/nix.sh
+    echo "Please add the following to your shell profile:\n source $HOME/.nix-profile/etc/profile.d/nix.sh"
     nix-env -i neovim
   fi
 
