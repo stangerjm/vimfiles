@@ -111,29 +111,31 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 Plug 'vim-airline/vim-airline'
 
 " Project search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " Undo tree visualizer
 Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
 
 " Markdown syntax highlighting
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+" Plug 'godlygeek/tabular'
+" Plug 'plasticboy/vim-markdown'
 
 " Markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-let g:mkdp_open_to_the_world = 1
-let g:mkdp_open_ip = '10.2.80.12' " change to you vps or vm ip
-let g:mkdp_port = 8080
-function! g:EchoUrl(url)
-    :echo a:url
-endfunction
-let g:mkdp_browserfunc = 'g:EchoUrl'
-let g:mkdp_auto_start = 1
-let g:mkdp_auto_close = 1
-let g:mkdp_page_title = '${name}'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+" let g:mkdp_open_to_the_world = 1
+" let g:mkdp_open_ip = '10.2.80.12' " change to you vps or vm ip
+" let g:mkdp_port = 8080
+" function! g:EchoUrl(url)
+"     :echo a:url
+" endfunction
+" let g:mkdp_browserfunc = 'g:EchoUrl'
+" let g:mkdp_auto_start = 1
+" let g:mkdp_auto_close = 1
+" let g:mkdp_page_title = '${name}'
 
 " Better VIM Movement
 Plug 'chaoren/vim-wordmotion'
@@ -233,8 +235,8 @@ nnoremap k gk
 " highlight last inserted text
 nnoremap gV `[v`]
 
-" Quick open Ag
-nnoremap <leader>a :Ag
+" Quick open Ack
+nnoremap <leader>a :Ack! 
 
 " Disable automatic newline inserts
 set tw=0
@@ -254,6 +256,9 @@ if &diff
     hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
 endif
 
+" Map quick folding
+nnoremap <leader>f zf
+
 " Map quick close all tabs
 nnoremap <leader>q :bufdo bdelete<CR>
 
@@ -270,3 +275,27 @@ set updatetime=300
 
 " Make sure the popup window is a nice color that doesn't hide any characters
 highlight Pmenu ctermbg=DarkGray guibg=gray
+
+" Macros for CMs
+let @d = '0i* j0dtbi  t-llDwwd$kkA pjddddddi  o'
+let @c = '0i* j0dtbi  t-llDjj0d$kkA pjdd'
+
+" Close all tabs to the left or to the right
+function! TabCloseRight(bang)
+    let cur=tabpagenr()
+    while cur < tabpagenr('$')
+        exe 'tabclose' . a:bang . ' ' . (cur + 1)
+    endwhile
+endfunction
+
+function! TabCloseLeft(bang)
+    while tabpagenr() > 1
+        exe 'tabclose' . a:bang . ' 1'
+    endwhile
+endfunction
+
+command! -bang Tabcloseright call TabCloseRight('<bang>')
+command! -bang Tabcloseleft call TabCloseLeft('<bang>')
+
+nnoremap <leader>xl :Tabcloseleft<CR>
+nnoremap <leader>xr :Tabcloseright<CR>
