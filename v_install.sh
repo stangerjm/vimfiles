@@ -23,6 +23,7 @@ then
   [ ! -d ~/.config ] && mkdir ~/.config
 
   cp -R ./nvim ~/.config
+  cp ./vimrc ~/.vim
 
   nvim +PlugInstall +qall
 else
