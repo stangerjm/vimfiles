@@ -16,6 +16,9 @@ let g:vim_jsx_pretty_colorful_config = 1
 " GQL syntax highlighting
 Plug 'jparise/vim-graphql'
 
+" Bash support
+Plug 'WolfgangMehner/bash-support'
+
 " File explorer
 Plug 'scrooloose/nerdtree'
 let NERDTreeShowHidden = 1
@@ -25,7 +28,6 @@ let g:NERDTreeWinSize=70
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
 nnoremap <leader>d :Gdiffsplit<CR>
-
 
 " File explorer tabs
 nnoremap <leader>n :call SyncTree()<CR>
@@ -58,6 +60,7 @@ if has('nvim')
   nmap <silent> gr <Plug>(coc-references)
   nmap <leader>rn <Plug>(coc-rename)
   nmap <leader>e <Plug>(coc-diagnostic-next)
+  nmap <leader>E <Plug>(coc-diagnostic-prev)
   nnoremap <silent> K :call <SID>show_documentation()<CR>
   inoremap <silent><expr> <C-c> coc#refresh()
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -66,13 +69,41 @@ if has('nvim')
   vmap <leader>s <Plug>(coc-codeaction-selected)
   nmap <leader>s <Plug>(coc-codeaction-selected)
 
+  set shortmess+=c
+
   function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
       execute 'h '.expand('<cword>')
     else
-      call CocAction('doHover')
+      call CocActionAsync('doHover')
     endif
   endfunction
+
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  " Use <c-space> to trigger completion.
+  if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+  else
+    inoremap <silent><expr> <c-@> coc#refresh()
+  endif
+
+  " Make <CR> auto-select the first completion item and notify coc.nvim to
+  " format on enter, <cr> could be remapped by other vim plugin
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
