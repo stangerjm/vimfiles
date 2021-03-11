@@ -1,0 +1,20 @@
+§ =============================================================
+§  Personal Information
+§ =============================================================
+
+SetMacro( 'AUTHOR',       'James Stanger' )
+SetMacro( 'AUTHORREF',    '' )
+SetMacro( 'EMAIL',        '' )
+SetMacro( 'ORGANIZATION', 'AIM' )
+SetMacro( 'COMPANY',      'Amazon' )
+SetMacro( 'COPYRIGHT',    'Copyright (c) |YEAR|, |AUTHOR|' )
+SetMacro( 'LICENSE',      'GNU General Public License' )
+
+§ =============================================================
+§  Date and Time Format
+§ =============================================================
+
+§SetFormat( 'DATE', '%x' )
+§SetFormat( 'TIME', '%H:%M' )
+§SetFormat( 'YEAR', '%Y' )
+

@@ -9,8 +9,10 @@ call plug#begin('~/.vim/plugged')
 " plugin section
 
 " JS/TS syntax highlighting
-Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'HerringtonDarkholme/yats.vim'
+let g:yats_host_keyword = 0
+
 let g:vim_jsx_pretty_colorful_config = 1
 
 " GQL syntax highlighting
@@ -19,15 +21,23 @@ Plug 'jparise/vim-graphql'
 " Bash support
 Plug 'WolfgangMehner/bash-support'
 
+" File manager
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fn <cmd>Telescope file_browser<cr>
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+
 " File explorer
 Plug 'scrooloose/nerdtree'
 let NERDTreeShowHidden = 1
 let g:NERDTreeWinSize=70
-
-" Git integration
-Plug 'tpope/vim-fugitive'
-Plug 'gregsexton/gitv', {'on': ['Gitv']}
-nnoremap <leader>d :Gdiffsplit<CR>
 
 " File explorer tabs
 nnoremap <leader>n :call SyncTree()<CR>
@@ -94,31 +104,12 @@ if has('nvim')
   endfunction
 
   " Use <c-space> to trigger completion.
-  if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-  else
-    inoremap <silent><expr> <c-@> coc#refresh()
-  endif
+  inoremap <silent><expr> <c-space> coc#refresh()
 
   " Make <CR> auto-select the first completion item and notify coc.nvim to
   " format on enter, <cr> could be remapped by other vim plugin
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                                 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-  Plug 'pangloss/vim-javascript'
-  Plug 'peitalin/vim-jsx-typescript'
-
-  let g:deoplete#enable_at_startup = 1
-
-  Plug 'neoclide/coc.nvim', { 'branch' : 'release', 'do' : './plugged/coc.nvim/install.sh' }
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-  Plug 'Quramy/tsuquyomi'
-  let g:tsuquyomi_disable_quickfix = 1
-  autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-
 endif
 
 " Comment toggling
@@ -126,53 +117,22 @@ Plug 'tomtom/tcomment_vim'
 nnoremap <leader>c :TComment<CR>
 vnoremap <leader>c :TComment<CR>
 
-" Themes
-Plug 'flrnprz/plastic.vim'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-
-" File finder
-Plug 'ctrlpvim/ctrlp.vim'
-set runtimepath^=~/.vim/plugged/ctrlp.vim
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 1
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" Theme
+Plug 'drewtempelmeyer/palenight.vim'
 
 " Status bar
 Plug 'vim-airline/vim-airline'
 
-" Project search
-Plug 'mileszs/ack.vim'
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
 " Undo tree visualizer
 Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
-
-" Markdown syntax highlighting
-" Plug 'godlygeek/tabular'
-" Plug 'plasticboy/vim-markdown'
-
-" Markdown preview
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-" let g:mkdp_open_to_the_world = 1
-" let g:mkdp_open_ip = '10.2.80.12' " change to you vps or vm ip
-" let g:mkdp_port = 8080
-" function! g:EchoUrl(url)
-"     :echo a:url
-" endfunction
-" let g:mkdp_browserfunc = 'g:EchoUrl'
-" let g:mkdp_auto_start = 1
-" let g:mkdp_auto_close = 1
-" let g:mkdp_page_title = '${name}'
 
 " Better VIM Movement
 Plug 'chaoren/vim-wordmotion'
 
 " (MUST BE AT END) Enable icons for file explorer
 Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " end vim-plug
 call plug#end()
@@ -190,7 +150,7 @@ set number
 :map , :let @/=""<CR>
 
 " Use syntax highlighting
-syntax on
+syntax enable
 
 " Set backspace behavior to be normal
 set bs=2
@@ -198,19 +158,22 @@ set bs=2
 " " Use all colors and set background to dark
 set t_Co=256
 set background=dark
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+if (has("termguicolors"))
+  set termguicolors
+endif
 
-" " Plastic
-" colorscheme plastic
-" let g:lightline = { 'colorscheme': 'plastic' }
+" Theme
+colorscheme palenight "Love it too!!
+let g:airline_theme = "palenight"
 
-colorscheme onehalfdark 
-let g:airline_theme='onehalfdark'
+" Configure Airline sections
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 
 " Ensure Background highlighting works as expected
 :set t_ut=""
 
-" gf opens files in a new split screen
+" gf opens files in a new buffer
 nnoremap gf <C-W>gf
 
 " Put arrow keys to use (directionally switch windows)
@@ -225,6 +188,7 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>k <C-w>k
 nnoremap <leader>j <C-w>j
 
+" Quick source of vimrc
 nnoremap <leader>r :so ~/.vim/vimrc<CR>
 
 " Easy scroll
@@ -239,6 +203,9 @@ set smarttab
 
 " Reflect file name in window title
 set title
+
+" Ensure tab display appears even if one buffer is open
+set showtabline=2
 
 " Increase undo limit and persist undo even after closing vim
 set history=1000
@@ -265,9 +232,6 @@ nnoremap k gk
 
 " highlight last inserted text
 nnoremap gV `[v`]
-
-" Quick open Ack
-nnoremap <leader>a :Ack! 
 
 " Disable automatic newline inserts
 set tw=0
@@ -297,15 +261,15 @@ nnoremap <leader>q :bufdo bdelete<CR>
 nnoremap <leader>t :tabonly<CR>
 
 nnoremap <leader>y "*y
+vnoremap <leader>y "*y
 nnoremap <leader>p "*p
+vnoremap <leader>p "*p
 
+" Set cursor to blink and reset when Vim closes
 set guicursor=a:ver50-blinkon1
 au VimLeave * set guicursor=a:ver50-blinkon1
 
 set updatetime=300
-
-" Make sure the popup window is a nice color that doesn't hide any characters
-highlight Pmenu ctermbg=DarkGray guibg=gray
 
 " Macros for CMs
 let @d = '0i* j0dtbi  t-llDwwd$kkA pjddddddi  o'
@@ -330,3 +294,24 @@ command! -bang Tabcloseleft call TabCloseLeft('<bang>')
 
 nnoremap <leader>xl :Tabcloseleft<CR>
 nnoremap <leader>xr :Tabcloseright<CR>
+
+" Explicitly disable the old regex engine
+set re=0
+
+" Telescope config
+lua << EOF
+  local actions = require('telescope.actions')
+  -- Global remapping
+  ------------------------------
+  require('telescope').setup{
+    defaults = {
+      mappings = {
+        i = {
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
+        },
+      },
+      borderchars = { '─', '┃', '─', '│', '┌', '┐', '┘', '└' },
+    }
+  }
+EOF

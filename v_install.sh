@@ -5,11 +5,9 @@ then
     echo "NeoVim is already installed, skipping installation"
   else
     # Install NeoVim because it's awesome!
-    sudo mkdir -m 0755 /nix && sudo chown $USER /nix
-    curl https://nixos.org/nix/install | sh
-    source $HOME/.nix-profile/etc/profile.d/nix.sh
-    echo "Please add the following to your shell profile:\n source $HOME/.nix-profile/etc/profile.d/nix.sh"
-    nix-env -i neovim
+    curl -o ./nvim.appimage -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+    sudo mv ./nvim.appimage /usr/local/bin/nvim
+    chmod u+x /usr/local/bin/nvim
   fi
 
   if [ ! -f ~/.vim/autoload/plug.vim ]
