@@ -1,6 +1,7 @@
 autoload/*
 plugged/*
 undodir/*
+squashfs-root/*
 .git*
 !.gitignore
 *.swp

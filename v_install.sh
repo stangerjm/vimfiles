@@ -6,9 +6,11 @@ then
   else
     # Install NeoVim because it's awesome!
     curl -o ./nvim.appimage -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+    chmod u+x ./nvim.appimage
 
-    sudo mv ./nvim.appimage /usr/local/bin/nvim
-    chmod u+x /usr/local/bin/nvim
+    ./nvim.appimage --appimage-extract
+
+    sudo ln -s /home/jastange/.vim/squashfs-root/usr/bin/nvim /usr/local/bin
 
     rm ./nvim.appimage
   fi
