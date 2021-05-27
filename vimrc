@@ -8,23 +8,21 @@ call plug#begin('~/.vim/plugged')
 
 " plugin section
 
-" JS/TS syntax highlighting
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'HerringtonDarkholme/yats.vim'
-let g:yats_host_keyword = 0
+" Awesome syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-let g:vim_jsx_pretty_colorful_config = 1
-
-" GQL syntax highlighting
-Plug 'jparise/vim-graphql'
-
-" Bash support
+" Bash/Fish support
 Plug 'WolfgangMehner/bash-support'
+Plug 'dag/vim-fish'
 
 " File manager
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+
+" Git integration
+Plug 'kdheepak/lazygit.nvim'
+nnoremap <silent> <leader>lg :LazyGit<cr>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -38,6 +36,14 @@ nnoremap <C-p> <cmd>Telescope find_files<cr>
 Plug 'scrooloose/nerdtree'
 let NERDTreeShowHidden = 1
 let g:NERDTreeWinSize=70
+
+" Test runner
+Plug 'vim-test/vim-test'
+nnoremap <leader>g :TestFile<CR>
+let test#strategy = 'neovim'
+
+" Easily exit terminal insert mode
+tmap <leader>i <C-\><C-n>
 
 " File explorer tabs
 nnoremap <leader>n :call SyncTree()<CR>
@@ -60,7 +66,7 @@ endfunction
 " JavaScript / TypeScript features / tools
 if has('nvim')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-spell-checker']
+  let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-spell-checker', 'coc-solargraph']
   autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
@@ -78,6 +84,13 @@ if has('nvim')
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
   vmap <leader>s <Plug>(coc-codeaction-selected)
   nmap <leader>s <Plug>(coc-codeaction-selected)
+
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
   set shortmess+=c
 
@@ -154,6 +167,9 @@ syntax enable
 
 " Set backspace behavior to be normal
 set bs=2
+
+" Ruby support
+let g:ruby_host_prog = "/local/home/jastange/.rbenv/versions/2.5.8/bin/neovim-ruby-host"
 
 " " Use all colors and set background to dark
 set t_Co=256
@@ -313,5 +329,10 @@ lua << EOF
       },
       borderchars = { '─', '┃', '─', '│', '┌', '┐', '┘', '└' },
     }
+  }
+  require'nvim-treesitter.configs'.setup {
+    highlight = {
+      enable = true,
+    },
   }
 EOF
