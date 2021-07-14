@@ -20,10 +20,6 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-" Git integration
-Plug 'kdheepak/lazygit.nvim'
-nnoremap <silent> <leader>lg :LazyGit<cr>
-
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -32,10 +28,9 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fn <cmd>Telescope file_browser<cr>
 nnoremap <C-p> <cmd>Telescope find_files<cr>
 
-" File explorer
-Plug 'scrooloose/nerdtree'
-let NERDTreeShowHidden = 1
-let g:NERDTreeWinSize=70
+" Git integration
+Plug 'kdheepak/lazygit.nvim'
+nnoremap <silent> <leader>lg :LazyGit<cr>
 
 " Test runner
 Plug 'vim-test/vim-test'
@@ -45,23 +40,12 @@ let test#strategy = 'neovim'
 " Easily exit terminal insert mode
 tmap <leader>i <C-\><C-n>
 
-" File explorer tabs
-nnoremap <leader>n :call SyncTree()<CR>
-
-" Sync current document with NERDTree
-" Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-function! SyncTree()
-  " Only search for the file if NERDTree isn't already open, there is a modifiable file in the window, and vim isn't in diff
-  if !IsNERDTreeOpen() && &modifiable && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-  else
-    NERDTreeToggle
-  endif
-endfunction
+" File explorer
+Plug 'kyazdani42/nvim-tree.lua'
+nnoremap <leader>n :NvimTreeToggle<CR>
+nnoremap <leader>rt :NvimTreeRefresh<CR>
+highlight NvimTreeFolderIcon guibg=blue
+let g:nvim_tree_follow = 1
 
 " JavaScript / TypeScript features / tools
 if has('nvim')
@@ -144,7 +128,6 @@ nnoremap <leader>u :UndotreeToggle<cr>
 Plug 'chaoren/vim-wordmotion'
 
 " (MUST BE AT END) Enable icons for file explorer
-Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " end vim-plug
@@ -203,6 +186,9 @@ nnoremap <leader>l <C-w>l
 nnoremap <leader>h <C-w>h
 nnoremap <leader>k <C-w>k
 nnoremap <leader>j <C-w>j
+nnoremap <silent> <leader>zi <C-w><Bar>
+nnoremap <leader>zo <C-w>=
+
 
 " Quick source of vimrc
 nnoremap <leader>r :so ~/.vim/vimrc<CR>
@@ -281,9 +267,8 @@ vnoremap <leader>y "*y
 nnoremap <leader>p "*p
 vnoremap <leader>p "*p
 
-" Set cursor to blink and reset when Vim closes
-set guicursor=a:ver50-blinkon1
-au VimLeave * set guicursor=a:ver50-blinkon1
+" Keep cursor the same as the terminal cursor
+set guicursor=
 
 set updatetime=300
 
@@ -327,7 +312,6 @@ lua << EOF
           ["<C-k>"] = actions.move_selection_previous,
         },
       },
-      borderchars = { '─', '┃', '─', '│', '┌', '┐', '┘', '└' },
     }
   }
   require'nvim-treesitter.configs'.setup {
