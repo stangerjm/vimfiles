@@ -45,69 +45,15 @@ Plug 'kyazdani42/nvim-tree.lua'
 nnoremap <leader>n :NvimTreeToggle<CR>
 nnoremap <leader>rt :NvimTreeRefresh<CR>
 highlight NvimTreeFolderIcon guibg=blue
-let g:nvim_tree_follow = 1
 
-" JavaScript / TypeScript features / tools
-if has('nvim')
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-spell-checker', 'coc-solargraph']
-  autocmd BufNewFile,BufRead *.tsx let b:tsx_ext_found = 1
-  autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+" Language-server config and autocomplete
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+set completeopt=menuone,noselect
 
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  nmap <leader>rn <Plug>(coc-rename)
-  nmap <leader>e <Plug>(coc-diagnostic-next)
-  nmap <leader>E <Plug>(coc-diagnostic-prev)
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-  inoremap <silent><expr> <C-c> coc#refresh()
-  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-  vmap <leader>s <Plug>(coc-codeaction-selected)
-  nmap <leader>s <Plug>(coc-codeaction-selected)
-
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-
-  set shortmess+=c
-
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    else
-      call CocActionAsync('doHover')
-    endif
-  endfunction
-
-  " Use tab for trigger completion with characters ahead and navigate.
-  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-  " other plugin before putting this into your config.
-  inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
-
-  " Use <c-space> to trigger completion.
-  inoremap <silent><expr> <c-space> coc#refresh()
-
-  " Make <CR> auto-select the first completion item and notify coc.nvim to
-  " format on enter, <cr> could be remapped by other vim plugin
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-endif
+" Snippet integration for autocompletion support
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " Comment toggling
 Plug 'tomtom/tcomment_vim'
@@ -299,24 +245,8 @@ nnoremap <leader>xr :Tabcloseright<CR>
 " Explicitly disable the old regex engine
 set re=0
 
-" Telescope config
-lua << EOF
-  local actions = require('telescope.actions')
-  -- Global remapping
-  ------------------------------
-  require('telescope').setup{
-    defaults = {
-      mappings = {
-        i = {
-          ["<C-j>"] = actions.move_selection_next,
-          ["<C-k>"] = actions.move_selection_previous,
-        },
-      },
-    }
-  }
-  require'nvim-treesitter.configs'.setup {
-    highlight = {
-      enable = true,
-    },
-  }
-EOF
+lua require('lsp-config')
+lua require('telescope-config')
+lua require('treesitter-config')
+lua require('compe-config')
+lua require('nvim-tree-config')

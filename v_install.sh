@@ -5,7 +5,7 @@
 #
 #         USAGE: ./v_install_2.sh
 #
-#   DESCRIPTION: Installs the latest stable version of NeoVim and some nice nvim integrations
+#   DESCRIPTION: Installs the latest stable version of NeoVim and some nice nvim plugins
 #
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
@@ -23,11 +23,13 @@ function usage {
   echo "usage: $programname"
   echo "  -u | --update"
   echo "    Update the current version of NeoVim to the latest stable build"
+  echo "  -p | --plugins"
+  echo "    Install NeoVim plugins"
   exit 1
 }
 
 IsUpdate=false
-InstallIntegrations=false
+InstallPlugins=false
 
 while [[ $# -gt 0 ]]; do
   key="$1"
@@ -37,8 +39,8 @@ while [[ $# -gt 0 ]]; do
       IsUpdate=true
       shift # past argument
       ;;
-    -i|--integrations)
-      InstallIntegrations=true
+    -p|--plugins)
+      InstallPlugins=true
       shift # past argument
       ;;
     *) # unknown option
@@ -93,6 +95,8 @@ fi
 #########################################
 # RELOAD NEOVIM CONFIG
 #########################################
+echo "Reloading NeoVim config"
+
 [ ! -d ~/.config ] && mkdir ~/.config
 
 NeoVimConfigPath="~/.config/nvim"
@@ -101,14 +105,14 @@ if [ -d "$NeoVimConfigPath" ]; then rm -r "$NeoVimConfigPath"; fi
 cp -R ./nvim ~/.config
 
 #########################################
-# INSTALL INTEGRATIONS
+# INSTALL PLUGINS
 #########################################
-# If not requested, don't install any integrations
-if [ "$InstallIntegrations" = false ]; then exit 0; fi
+# If not requested, don't install any plugins
+if [ "$InstallPlugins" = false ]; then exit 0; fi
 
 if ! [ -x "$(command -v node)" ]
 then
-  echo "Installing NeoVim integrations requires Node, please install NodeJS"
+  echo "Installing NeoVim plugins requires Node, please install NodeJS"
 fi
 
 GlobalNodeModules="$(npm get prefix)/lib/node_modules"
@@ -118,7 +122,7 @@ then
   exit 1
 fi
 
-echo "Installing integrations..."
+echo "Installing plugins..."
 
 # Install vim-plug if not already installed
 if [ ! -f ~/.vim/autoload/plug.vim ]
