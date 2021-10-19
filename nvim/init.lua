@@ -27,7 +27,7 @@ vim.o.smarttab = true
 
 -- Increase undo limit and persist undo even after closing vim
 vim.o.history = 1000
-vim.o.undodir = '~/.vim/undodir'
+vim.opt.undodir = vim.fn.stdpath('config') .. '/undo'
 vim.o.undofile = true
 vim.o.undolevels = 1000
 vim.o.undoreload = 10000
