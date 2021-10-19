@@ -6,7 +6,11 @@ end
 
 require('packer').startup(function(use)
   -- Syntax highlighting
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function() require('treesitter-config') end
+  }
 
   -- Bash/Fish support
   use 'WolfgangMehner/bash-support'
@@ -15,8 +19,10 @@ require('packer').startup(function(use)
   -- File manager/explorer
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
-  use 'nvim-telescope/telescope.nvim'
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'nvim-telescope/telescope.nvim',
+    config = function() require('telescope-config') end
+  }
 
   -- Git
   use 'kdheepak/lazygit.nvim'
@@ -25,8 +31,17 @@ require('packer').startup(function(use)
   use 'vim-test/vim-test'
 
   -- Language-server config and autocomplete
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('ts-lsp-config')
+      require('lua-lsp-config')
+    end
+  }
+  use {
+    'hrsh7th/nvim-compe',
+    config = function() require('compe-config') end
+  }
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'jose-elias-alvarez/null-ls.nvim'
 
@@ -41,13 +56,25 @@ require('packer').startup(function(use)
   use 'drewtempelmeyer/palenight.vim'
 
   -- Status bar
-  use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function() require('lualine-config') end
+  }
 
   -- Undo tree visualizer
   use 'mbbill/undotree'
 
   -- Better VIM Movement
   use 'chaoren/vim-wordmotion'
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    opt = true,
+    cmd = 'NvimTreeToggle',
+    config = function() require'nvim-tree-config' end
+  }
 
   -- Enable icons for file explorer
   use 'kyazdani42/nvim-web-devicons'

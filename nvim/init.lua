@@ -8,13 +8,6 @@ vim.cmd('colorscheme palenight')
 
 require('plugins')
 require('keymap')
-require('ts-lsp-config')
-require('lua-lsp-config')
-require('telescope-config')
-require('treesitter-config')
-require('compe-config')
-require('nvim-tree-config')
-require('lualine-config')
 
 -- Language-server config and autocomplete
 vim.o.completeopt = 'menuone,noselect'
