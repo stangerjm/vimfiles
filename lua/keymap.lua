@@ -1,3 +1,4 @@
+print "init"
 local function map(args)
   local mode = args.mode or 'n'
   local key = args.key or nil

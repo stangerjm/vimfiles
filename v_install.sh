@@ -99,10 +99,17 @@ echo "Reloading NeoVim config"
 
 [ ! -d ~/.config ] && mkdir ~/.config
 
-NeoVimConfigPath="~/.config/nvim"
+NeoVimConfigPath="$HOME/.config/nvim"
 # Copy NeoVim config to global config directory (refresh if already exists)
-if [ -d "$NeoVimConfigPath" ]; then rm -r "$NeoVimConfigPath"; fi
-cp -R ./nvim ~/.config
+
+# Ensure nvim config directory exists
+[ ! -d $NeoVimConfigPath ] && mkdir $NeoVimConfigPath
+
+# Copy lua init and config files
+rm -r "$NeoVimConfigPath/lua"
+cp -R ./lua "$NeoVimConfigPath"
+rm "$NeoVimConfigPath/init.lua"
+cp ./init.lua "$NeoVimConfigPath"
 
 #########################################
 # INSTALL PLUGINS
