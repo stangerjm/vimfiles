@@ -4,7 +4,6 @@ vim.cmd('syntax enable')
 -- Theme config
 vim.o.background = 'dark'
 vim.o.termguicolors = true
-vim.cmd('colorscheme palenight')
 
 require('plugins')
 require('keymap')

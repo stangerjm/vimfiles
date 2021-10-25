@@ -5,6 +5,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
+  -- Theme
+  use {
+    'drewtempelmeyer/palenight.vim',
+    config = function() vim.cmd('colorscheme palenight') end
+  }
+
   -- Syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -51,9 +57,6 @@ require('packer').startup(function(use)
 
   -- Comment toggling
   use 'tomtom/tcomment_vim'
-
-  -- Theme
-  use 'drewtempelmeyer/palenight.vim'
 
   -- Status bar
   use {

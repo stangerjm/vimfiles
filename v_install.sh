@@ -106,9 +106,9 @@ NeoVimConfigPath="$HOME/.config/nvim"
 [ ! -d $NeoVimConfigPath ] && mkdir $NeoVimConfigPath
 
 # Copy lua init and config files
-rm -r "$NeoVimConfigPath/lua"
+[ -d "$NeoVimConfigPath/lua" ] && rm -r "$NeoVimConfigPath/lua"
 cp -R ./lua "$NeoVimConfigPath"
-rm "$NeoVimConfigPath/init.lua"
+[ -f "$NeoVimConfigPath/init.lua" ] && rm "$NeoVimConfigPath/init.lua"
 cp ./init.lua "$NeoVimConfigPath"
 
 #########################################
