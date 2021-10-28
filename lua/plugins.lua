@@ -7,8 +7,14 @@ end
 require('packer').startup(function(use)
   -- Theme
   use {
-    'drewtempelmeyer/palenight.vim',
-    config = function() vim.cmd('colorscheme palenight') end
+    'marko-cerovac/material.nvim',
+    config = function() require('material-config') end
+  }
+
+  use {
+    'akinsho/bufferline.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function() require('bufferline-config') end
   }
 
   -- Syntax highlighting
@@ -17,10 +23,6 @@ require('packer').startup(function(use)
     run = ':TSUpdate',
     config = function() require('treesitter-config') end
   }
-
-  -- Bash/Fish support
-  use 'WolfgangMehner/bash-support'
-  use 'dag/vim-fish'
 
   -- File manager/explorer
   use 'nvim-lua/popup.nvim'
@@ -44,12 +46,11 @@ require('packer').startup(function(use)
       require('lua-lsp-config')
     end
   }
+
   use {
     'hrsh7th/nvim-compe',
     config = function() require('compe-config') end
   }
-  use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-  use 'jose-elias-alvarez/null-ls.nvim'
 
   -- Snippet integration for autocompletion support
   use 'hrsh7th/vim-vsnip'
@@ -65,9 +66,6 @@ require('packer').startup(function(use)
     config = function() require('lualine-config') end
   }
 
-  -- Undo tree visualizer
-  use 'mbbill/undotree'
-
   -- Better VIM Movement
   use 'chaoren/vim-wordmotion'
 
@@ -78,9 +76,6 @@ require('packer').startup(function(use)
     cmd = 'NvimTreeToggle',
     config = function() require'nvim-tree-config' end
   }
-
-  -- Enable icons for file explorer
-  use 'kyazdani42/nvim-web-devicons'
 
   if packer_bootstrap then
     require('packer').sync()

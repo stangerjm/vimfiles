@@ -1,8 +1,16 @@
-print "init"
+--[[
+  Wrapper around vim.api.nvim_set_keymap
+
+  Properties
+    key (required)
+    cmd (required)
+    mode = 'n'
+    options = { noremap = true }
+]]--
 local function map(args)
-  local mode = args.mode or 'n'
   local key = args.key or nil
   local cmd = args.cmd or nil
+  local mode = args.mode or 'n'
   local options = args.options or { noremap = true }
   vim.api.nvim_set_keymap(mode, key, cmd, options)
 end
@@ -36,9 +44,6 @@ map{ mode = 'n', key = '<leader>rt', cmd = ':NvimTreeRefresh<CR>' }
 map{ key = '<leader>c', cmd = ':TComment<CR>' }
 map{ mode = 'v', key = '<leader>c', cmd = ':TComment<CR>' }
 
--- Undo tree visualizer
-map{ key = '<leader>u', cmd = ':UndotreeToggle<CR>' }
-
 -- Also allow normal directional keys move windows
 map{ key = '<leader>l', cmd = '<C-w>l' }
 map{ key = '<leader>h', cmd = '<C-w>h' }
@@ -59,11 +64,14 @@ map{ key = 'gV', cmd = '`[v`]' }
 -- Quick folding
 map{ key = '<leader>f', cmd = 'zf' }
 
--- Quick close all tabs
-map{ key = '<leader>q', cmd = ':bufdo bdelete<CR>' }
+-- Remap tab commands to navigate buffers
+map{ key = 'gt', cmd = ':BufferLineCycleNext<CR>' }
+map{ key = 'gT', cmd = ':BufferLineCyclePrev<CR>' }
 
--- Quick close all but current tab
-map{ key = '<leader>t', cmd = ':tabonly<CR>' }
+-- Quick bulk-close tabs
+map{ key = '<leader>t', cmd = ':BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>' }
+map{ key = '<leader>xl', cmd = ':BufferLineCloseLeft<CR>' }
+map{ key = '<leader>xr', cmd = ':BufferLineCloseRight<CR>' }
 
 -- Copy/paste helpers
 map{ key = '<leader>y', cmd = '"*y' }

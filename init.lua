@@ -34,9 +34,6 @@ vim.o.undoreload = 10000
 -- Store swap files in a separate directory
 vim.o.directory = vim.o.directory .. '$HOME/.vim/tmp//'
 
--- Highlight line cursor is on
-vim.o.cursorline = true
-
 -- Don't rerender editor if unecessary
 vim.o.lazyredraw = true
 
@@ -77,5 +74,6 @@ if (vim.opt.diff:get()) then
   ]]
 end
 
+-- Macros for CMs
 vim.g['@d'] = '0i* j0dtbi  t-llDwwd$kkA pjddddddi  o'
 vim.g['@c'] = '0i* j0dtbi  t-llDjj0d$kkA pjdd'
