@@ -54,6 +54,10 @@ vim.o.guicursor = ''
 -- Explicitly disable the old regex engine
 vim.o.re = 0
 
+-- Allow changing buffers without saving files
+vim.o.hidden = true;
+vim.o.confirm = true;
+
 -- General config
 vim.o.encoding = 'utf-8'
 vim.o.number = true
