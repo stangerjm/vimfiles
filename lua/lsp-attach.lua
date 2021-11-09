@@ -17,6 +17,7 @@ function custom_attach.on_attach(client, bufnr)
 
     buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
     buf_map(bufnr, "n", "gr", ":LspRefs<CR>", {silent = true})
+    buf_map(bufnr, "n", "gi", ":LspImplementation<CR>", {silent = true})
     buf_map(bufnr, "n", "gR", ":LspRename<CR>", {silent = true})
     buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>", {silent = true})
     buf_map(bufnr, "n", "K", ":LspHover<CR>", {silent = true})

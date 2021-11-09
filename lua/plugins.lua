@@ -34,6 +34,10 @@ require('packer').startup(function(use)
 
   -- Git
   use 'kdheepak/lazygit.nvim'
+  use {
+    'f-person/git-blame.nvim',
+    config = function() vim.g.gitblame_enabled = 0 end
+  }
 
   -- Test runner
   use 'vim-test/vim-test'

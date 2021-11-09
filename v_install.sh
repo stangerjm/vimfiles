@@ -56,40 +56,14 @@ if [ -x "$(command -v nvim)" ] && [ "$IsUpdate" = false ]
 then
   echo "NeoVim is already installed, skipping installation"
 else
-  # Ensure the current directory is in the path of the script
-  cd "`dirname \"$0\"`"
-
-  ScriptPath="$(pwd)"
-  AppimagePath="$ScriptPath/squashfs-root"
-  NeoVimPath="$(command -v nvim)"
-  LocalExecutablePath="/usr/local/bin"
-  AppimageUrl="https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
-
-  # Ensure executing user has access to the local executable directory
-  if ! [ -r "$LocalExecutablePath" ] || ! [ -w "$LocalExecutablePath" ]
+  if [ -x "$(command -v brew)" ]
   then
-    echo "Access to $LocalExecutablePath is required, please run with elevated permissions."
-    exit 1
+    echo "Installing NeoVim"
+    brew install neovim
+  else
+    echo "Brew not installed, just install Brew. Trust me."
+    echo "You can install it for Linux, WSL, or Mac. Don't mess around, just install Brew."
   fi
-
-  echo "Installing NeoVim..."
-
-  # Remove the current appimage if exists
-  if [ -d "$AppimagePath" ]; then rm -r "$AppimagePath"; fi
-
-  # Remove the current NeoVim executable
-  rm "$NeoVimPath"
-
-  # Download the latest stable appimage of nvim
-  curl -o ./nvim.appimage -L "$AppimageUrl"
-
-  chmod u+x ./nvim.appimage
-
-  ./nvim.appimage --appimage-extract
-
-  ln -s "$AppimagePath/usr/bin/nvim" "$LocalExecutablePath"
-
-  rm ./nvim.appimage
 fi
 
 #########################################
@@ -99,17 +73,33 @@ echo "Reloading NeoVim config"
 
 [ ! -d ~/.config ] && mkdir ~/.config
 
-NeoVimConfigPath="$HOME/.config/nvim"
 # Copy NeoVim config to global config directory (refresh if already exists)
+NeoVimConfigPath="$HOME/.config/nvim"
 
 # Ensure nvim config directory exists
 [ ! -d $NeoVimConfigPath ] && mkdir $NeoVimConfigPath
 
-# Copy lua init and config files
-[ -d "$NeoVimConfigPath/lua" ] && rm -r "$NeoVimConfigPath/lua"
+# Reload/copy lua config files
+[ -d "$NeoVimConfigPath/lua" ] && rm -rf "$NeoVimConfigPath"/lua
 cp -R ./lua "$NeoVimConfigPath"
-[ -f "$NeoVimConfigPath/init.lua" ] && rm "$NeoVimConfigPath/init.lua"
+
+# Reload/copy lua init
+[ -f "$NeoVimConfigPath/init.lua" ] && rm "$NeoVimConfigPath"/init.lua
 cp ./init.lua "$NeoVimConfigPath"
+
+# Prompt to remove init.vim if exists
+if [ -f "$NeoVimConfigPath/init.vim" ]
+then
+  read -r -p "Detected init.vim in $NeoVimConfigPath, which will interfere with this config. Do you want to delete $NeoVimConfigPath/init.vim? [y/N] " response
+  case "$response" in
+    [yY][eE][sS]|[yY])
+      rm "$NeoVimConfigPath"/init.vim
+      ;;
+    *)
+      echo "Did not remove init.vim. Please remove init.vim for this setup to work properly."
+      ;;
+  esac
+fi
 
 #########################################
 # INSTALL PLUGINS
@@ -122,7 +112,7 @@ then
   echo "Installing NeoVim plugins requires Node, please install NodeJS"
 fi
 
-GlobalNodeModules="$(npm get prefix)/lib/node_modules"
+GlobalNodeModules="$(npm get prefix)/bin"
 if ! [ -r "$GlobalNodeModules" ] || ! [ -w "$GlobalNodeModules" ]
 then
   echo "Access to $GlobalNodeModules is required, please run with elevated permissions."

@@ -31,6 +31,9 @@ map{ key = '<C-p>', cmd = '<cmd>Telescope find_files<cr>' }
 -- LazyGit
 map{ key = '<leader>lg', cmd = ':LazyGit<CR>', options = { silent = true, noremap = true } }
 
+-- Toggle git blame
+map{ key = '<leader>b', cmd = ':GitBlameToggle<CR>' }
+
 -- Test runner
 map{ key = '<leader>g', cmd = ':TestFile<CR>' }
 map{ mode = 't', key = '<leader>i', cmd = '<C-\\><C-n>', options = {} }
@@ -68,10 +71,13 @@ map{ key = '<leader>f', cmd = 'zf' }
 map{ key = 'gt', cmd = ':BufferLineCycleNext<CR>' }
 map{ key = 'gT', cmd = ':BufferLineCyclePrev<CR>' }
 
--- Quick bulk-close tabs
+-- Quick bulk-close buffers
 map{ key = '<leader>t', cmd = ':BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>' }
 map{ key = '<leader>xl', cmd = ':BufferLineCloseLeft<CR>' }
 map{ key = '<leader>xr', cmd = ':BufferLineCloseRight<CR>' }
+
+-- Close current buffer
+map{ key = '<leader>q', cmd = ':bd<CR>' }
 
 -- Copy/paste helpers
 map{ key = '<leader>y', cmd = '"*y' }
