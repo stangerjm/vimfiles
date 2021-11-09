@@ -120,7 +120,7 @@ then
 fi
 
 # Install TS and NeoVim NPM modules
-NpmPackages=(typescript neovim)
+NpmPackages=(typescript neovim diagnostic-languageserver typescript-language-server)
 
 for package in ${NpmPackages[@]}; do
   if [ `npm list -g | grep -c $package` -eq 0 ]; then
