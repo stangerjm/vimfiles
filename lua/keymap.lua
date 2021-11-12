@@ -44,8 +44,9 @@ map{ key = '<leader>n', cmd = ':NvimTreeToggle<CR>' }
 map{ mode = 'n', key = '<leader>rt', cmd = ':NvimTreeRefresh<CR>' }
 
 -- Comment toggling
-map{ key = '<leader>c', cmd = ':TComment<CR>' }
-map{ mode = 'v', key = '<leader>c', cmd = ':TComment<CR>' }
+map{ mode = 'n', key = '<leader>c', cmd = '<Plug>kommentary_line_default', options = {} }
+map{ mode = 'n', key = '<leader>mc', cmd = '<Plug>kommentary_motion_default', options = {} }
+map{ mode = 'x', key = '<leader>c', cmd = '<Plug>kommentary_visual_default', options = {} }
 
 -- Also allow normal directional keys move windows
 map{ key = '<leader>l', cmd = '<C-w>l' }

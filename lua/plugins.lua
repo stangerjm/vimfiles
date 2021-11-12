@@ -69,7 +69,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/vim-vsnip-integ'
 
   -- Comment toggling
-  use 'tomtom/tcomment_vim'
+  use 'b3nj5m1n/kommentary'
 
   -- Status bar
   use {
