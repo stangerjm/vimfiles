@@ -101,6 +101,16 @@ then
   esac
 fi
 
+PackerLocation="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+ 
+# Only update if Packer is installed
+if [ -d $PackerLocation ]
+then
+  # Update packer if plugins have changed
+  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+fi
+
+
 #########################################
 # INSTALL PLUGINS
 #########################################

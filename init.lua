@@ -1,6 +1,13 @@
 -- Use syntax highlighting (must be before initializing LSP or syntax highlighting plugins)
 vim.cmd('syntax enable')
 
+-- Keep cursor the same as the terminal cursor
+vim.cmd[[
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+  set guicursor=
+  augroup Shape autocmd! autocmd VimLeave * set guicursor=a:ver90 augroup END
+]]
+
 -- Theme config
 vim.o.background = 'dark'
 vim.o.termguicolors = true
@@ -9,7 +16,7 @@ require('plugins')
 require('keymap')
 
 -- Language-server config and autocomplete
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menu,menuone,noselect'
 
 -- Search config
 vim.o.incsearch = true
@@ -47,9 +54,6 @@ vim.cmd('autocmd BufReadPre,BufNewFile * let b:did_ftplugin = 1')
 -- Let Vim make decision on whether to do a case sensitive or insensitive search
 vim.o.ignorecase = true
 vim.o.smartcase = true
-
--- Keep cursor the same as the terminal cursor
-vim.o.guicursor = ''
 
 -- Explicitly disable the old regex engine
 vim.o.re = 0

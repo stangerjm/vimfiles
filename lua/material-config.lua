@@ -4,5 +4,5 @@ require('material').setup{
   }
 }
 
-vim.g.material_style = 'oceanic'
+vim.g.material_style = 'darker'
 vim.cmd('colorscheme material')
