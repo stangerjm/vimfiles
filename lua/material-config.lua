@@ -1,6 +1,6 @@
 require('material').setup{
   custom_highlights = {
-    BufferLineFill = { bg = '#141b1e' }
+    BufferLineFill = { bg = '#121212' }
   }
 }
 

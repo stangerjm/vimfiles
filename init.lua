@@ -85,3 +85,8 @@ end
 -- Macros for CMs
 vim.g['@d'] = '0i* j0dtbi  t-llDwwd$kkA pjddddddi  o'
 vim.g['@c'] = '0i* j0dtbi  t-llDjj0d$kkA pjdd'
+
+-- Add comment support for unknown files
+vim.cmd[[
+  autocmd FileType sh setlocal commentstring=#\ %s
+]]

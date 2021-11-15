@@ -69,7 +69,11 @@ return require('packer').startup(function(use)
   use 'hrsh7th/vim-vsnip-integ'
 
   -- Comment toggling
-  use 'b3nj5m1n/kommentary'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use {
+    'b3nj5m1n/kommentary',
+    config = function() require('comment-config') end
+  }
 
   -- Status bar
   use {
