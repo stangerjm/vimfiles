@@ -38,10 +38,6 @@ return require('packer').startup(function(use)
   -- Git
   use 'kdheepak/lazygit.nvim'
   use {
-    'sindrets/diffview.nvim',
-    config = function() require('diffview-config') end
-  }
-  use {
     'f-person/git-blame.nvim',
     config = function() vim.g.gitblame_enabled = 0 end
   }
