@@ -34,6 +34,9 @@ map{ key = '<leader>lg', cmd = ':LazyGit<CR>', options = { silent = true, norema
 -- Toggle git blame
 map{ key = '<leader>b', cmd = ':GitBlameToggle<CR>' }
 
+-- Open git diff
+map{ key = '<leader>d', cmd = ':DiffviewOpen<CR>' }
+
 -- Test runner
 map{ key = '<leader>g', cmd = ':TestFile<CR>' }
 map{ mode = 't', key = '<leader>i', cmd = '<C-\\><C-n>', options = {} }
