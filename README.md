@@ -3,8 +3,7 @@ Vim config files
 
 Key
 ----
-* `<space>`: spacebar
-* `<ctrl>`: Control key
+* `<leader>`: <space>
 
 Mappings
 --------
@@ -23,9 +22,7 @@ Mappings
     * Go to next lint/TS error: `<space> e`
     * Show documentation: `K`
 * Toggle comment: `<space> c`
-    * This uses a plugin called [tcomment_vim](https://github.com/tomtom/tcomment_vim)
-* View undo history: `<space> u`
-    * This uses a plugin called [undotree](https://github.com/mbbill/undotree)
+    * This uses a plugin called [kommentary](https://github.com/b3nj5m1n/kommentary)
 * Clear previous search: `,`
-* Quick close all tabs: `<space> q`
-* Quick close all but current tab: `<space> t`
+* Quick close current buffer: `<space> q`
+* Quick close all but current buffer: `<space> t`

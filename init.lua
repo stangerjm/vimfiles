@@ -76,9 +76,9 @@ if (vim.opt.diff:get()) then
   vim.api.nvim_set_keymap('', ']', ']c', {})
   vim.api.nvim_set_keymap('', '[', '[c', {})
   vim.cmd[[
-    hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
-    hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
-    hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
+    autocmd ColorScheme * hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
+    \ | hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
+    \ | hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
   ]]
 end
 

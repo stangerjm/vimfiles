@@ -29,14 +29,13 @@ map{ key = '<leader>fn', cmd = '<cmd>Telescope file_browser<cr>' }
 map{ key = '<C-p>', cmd = '<cmd>Telescope find_files<cr>' }
 
 -- LazyGit
-map{ key = '<leader>lg', cmd = ':LazyGit<CR>', options = { silent = true, noremap = true } }
+map{ key = '<leader>vg', cmd = ':LazyGit<CR>', options = { silent = true, noremap = true } }
 
 -- Toggle git blame
 map{ key = '<leader>b', cmd = ':GitBlameToggle<CR>' }
 
 -- Test runner
 map{ key = '<leader>g', cmd = ':TestFile<CR>' }
-map{ mode = 't', key = '<leader>i', cmd = '<C-\\><C-n>', options = {} }
 vim.g['test#strategy'] = 'neovim'
 
 -- File explorer
@@ -88,3 +87,7 @@ map{ mode = 'v', key = '<leader>p', cmd = '"*p' }
 
 -- Map the ',' key to a command that clears the previous search
 map{ mode = '', key = ',', cmd = ':let @/=""<CR>' }
+
+-- Open and close floating terminal
+map{ key = '<A-i>', cmd = '<CMD>lua require("FTerm").toggle()<CR>', options = { silent = true, noremap = true } }
+map{ mode = 't', key = '<A-i>', cmd = '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', options = { silent = true, noremap = true } }

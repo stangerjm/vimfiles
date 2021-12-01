@@ -93,6 +93,8 @@ return require('packer').startup(function(use)
     config = function() require'nvim-tree-config' end
   }
 
+  use 'numToStr/FTerm.nvim'
+
   if packer_bootstrap then
     require('packer').sync()
   end
