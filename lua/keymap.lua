@@ -67,15 +67,6 @@ map{ key = 'gV', cmd = '`[v`]' }
 -- Quick folding
 map{ key = '<leader>f', cmd = 'zf' }
 
--- Remap tab commands to navigate buffers
-map{ key = 'gt', cmd = ':BufferLineCycleNext<CR>' }
-map{ key = 'gT', cmd = ':BufferLineCyclePrev<CR>' }
-
--- Quick bulk-close buffers
-map{ key = '<leader>t', cmd = ':BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>' }
-map{ key = '<leader>xl', cmd = ':BufferLineCloseLeft<CR>' }
-map{ key = '<leader>xr', cmd = ':BufferLineCloseRight<CR>' }
-
 -- Close current buffer
 map{ key = '<leader>q', cmd = ':bd<CR>' }
 

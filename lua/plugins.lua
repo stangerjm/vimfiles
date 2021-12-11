@@ -8,16 +8,23 @@ return require('packer').startup(function(use)
   -- Specify packer as a dependency so it auto-updates and does not get wiped out
   use 'wbthomason/packer.nvim'
 
-  -- Theme
+  -- Status bar
   use {
-    'marko-cerovac/material.nvim',
-    config = function() require('material-config') end
+    'hoob3rt/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function() require('lualine-config') end
   }
 
+  -- Theme
   use {
-    'akinsho/bufferline.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function() require('bufferline-config') end
+    'projekt0n/github-nvim-theme',
+    config = function() require('theme-config') end
+  }
+
+  -- LSP Colors
+  use {
+    'folke/lsp-colors.nvim',
+    config = function() require('lsp-color-config') end
   }
 
   -- Syntax highlighting
@@ -75,23 +82,8 @@ return require('packer').startup(function(use)
     config = function() require('comment-config') end
   }
 
-  -- Status bar
-  use {
-    'hoob3rt/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function() require('lualine-config') end
-  }
-
   -- Better VIM Movement
   use 'chaoren/vim-wordmotion'
-
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    opt = true,
-    cmd = 'NvimTreeToggle',
-    config = function() require'nvim-tree-config' end
-  }
 
   use 'numToStr/FTerm.nvim'
 

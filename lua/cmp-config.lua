@@ -1,26 +1,3 @@
--- require'cmp'.setup {
---   enabled = true;
---   autocomplete = true;
---   source = {
---     path = true;
---     buffer = true;
---     calc = true;
---     nvim_lsp = true;
---     nvim_lua = true;
---     ultisnips = true;
---     luasnip = true;
---   };
--- }
---
--- local t = function(str)
---   return vim.api.nvim_replace_termcodes(str, true, true, true)
--- end
---
--- local check_back_space = function()
---     local col = vim.fn.col('.') - 1
---     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
--- end
---
 local cmp = require'cmp'
 local lspkind = require('lspkind')
 

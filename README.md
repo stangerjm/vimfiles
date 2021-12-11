@@ -25,4 +25,3 @@ Mappings
     * This uses a plugin called [kommentary](https://github.com/b3nj5m1n/kommentary)
 * Clear previous search: `,`
 * Quick close current buffer: `<space> q`
-* Quick close all but current buffer: `<space> t`

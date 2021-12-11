@@ -3,7 +3,6 @@ vim.cmd('syntax enable')
 
 -- Keep cursor the same as the terminal cursor
 vim.cmd[[
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
   set guicursor=
   augroup Shape autocmd! autocmd VimLeave * set guicursor=a:ver90 augroup END
 ]]
@@ -70,17 +69,8 @@ vim.o.title = true
 vim.o.showtabline = 2
 vim.o.updatetime = 300
 
--- Add nice colors to vimdiff
-if (vim.opt.diff:get()) then
-  vim.o.cursorline = true
-  vim.api.nvim_set_keymap('', ']', ']c', {})
-  vim.api.nvim_set_keymap('', '[', '[c', {})
-  vim.cmd[[
-    autocmd ColorScheme * hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
-    \ | hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
-    \ | hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
-  ]]
-end
+-- New splits should open buffers below the current buffer
+vim.o.splitbelow = true
 
 -- Macros for CMs
 vim.g['@d'] = '0i* j0dtbi  t-llDwwd$kkA pjddddddi  o'

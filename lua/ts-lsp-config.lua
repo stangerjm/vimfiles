@@ -3,7 +3,7 @@ local on_attach = require('./lsp-attach').on_attach
 
 -- TSServer config
 nvim_lsp.tsserver.setup {
-    on_attach = on_attach
+    on_attach = on_attach,
 }
 
 -- Lint config
