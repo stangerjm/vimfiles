@@ -7,8 +7,6 @@ Key
 
 Mappings
 --------
-* Toggle file manager: `<space> n` (hitting this again with the file manager open will close it)
-    * This uses a plugin called [NvimTree](https://github.com/kyazdani42/nvim-tree.lua)
 * Fuzzy file search: `<ctrl> p` and then start typing
     * This uses a plugin called [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 * Project search `<space> fg`: 

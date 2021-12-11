@@ -38,10 +38,6 @@ map{ key = '<leader>b', cmd = ':GitBlameToggle<CR>' }
 map{ key = '<leader>g', cmd = ':TestFile<CR>' }
 vim.g['test#strategy'] = 'neovim'
 
--- File explorer
-map{ key = '<leader>n', cmd = ':NvimTreeToggle<CR>' }
-map{ mode = 'n', key = '<leader>rt', cmd = ':NvimTreeRefresh<CR>' }
-
 -- Comment toggling
 map{ mode = 'n', key = '<leader>c', cmd = '<Plug>kommentary_line_default', options = {} }
 map{ mode = 'n', key = '<leader>mc', cmd = '<Plug>kommentary_motion_default', options = {} }
