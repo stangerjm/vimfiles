@@ -70,6 +70,7 @@ vim.o.showtabline = 2
 vim.o.updatetime = 300
 
 -- New splits should open buffers below the current buffer
+vim.o.splitright = true
 vim.o.splitbelow = true
 
 -- Macros for CMs

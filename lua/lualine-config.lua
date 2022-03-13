@@ -1,7 +1,7 @@
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'github',
+    theme = 'material-stealth',
   },
   tabline = {
     lualine_a = {

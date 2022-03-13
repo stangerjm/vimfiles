@@ -1,9 +1,13 @@
 local nvim_lsp = require("lspconfig")
 local on_attach = require('./lsp-attach').on_attach
 
+local tsCapabilities = vim.lsp.protocol.make_client_capabilities()
+tsCapabilities = require('cmp_nvim_lsp').update_capabilities(tsCapabilities)
+
 -- TSServer config
 nvim_lsp.tsserver.setup {
     on_attach = on_attach,
+    capabilities = tsCapabilities,
 }
 
 -- Lint config

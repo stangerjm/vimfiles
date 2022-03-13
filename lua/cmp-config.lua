@@ -1,14 +1,9 @@
 local cmp = require'cmp'
-local lspkind = require('lspkind')
 
 cmp.setup({
-  formatting = {
-    format = lspkind.cmp_format({with_text = false, maxwidth = 50})
-  },
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   mapping = {
@@ -17,7 +12,6 @@ cmp.setup({
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-c>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ['<C-e>'] = cmp.mapping({
       i = cmp.mapping.abort(),
@@ -26,8 +20,8 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = cmp.config.sources({
+    { name = 'vsnip' },
     { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
   }, {
     { name = 'buffer' },
   })

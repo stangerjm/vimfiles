@@ -36,6 +36,8 @@ map{ key = '<leader>b', cmd = ':GitBlameToggle<CR>' }
 
 -- Test runner
 map{ key = '<leader>g', cmd = ':TestFile<CR>' }
+map{ key = '<leader>n', cmd = ':TestNearest<CR>' }
+map{ mode='t', key = '<C-o>', cmd = '<C-\\><C-n>' }
 vim.g['test#strategy'] = 'neovim'
 
 -- Comment toggling
@@ -48,6 +50,13 @@ map{ key = '<leader>l', cmd = '<C-w>l' }
 map{ key = '<leader>h', cmd = '<C-w>h' }
 map{ key = '<leader>k', cmd = '<C-w>k' }
 map{ key = '<leader>j', cmd = '<C-w>j' }
+
+-- Quick map for zooming in and out of windows
+map{ key = '<leader>z', cmd = '<C-w>|' }
+map{ key = '<leader>o', cmd = '<C-w>=' }
+
+-- Quick map for rotating windows
+map{ key = '<leader>r', cmd = '<C-w>r' }
 
 -- Easy scroll
 map{ key = '<C-k>', cmd = '<C-y>' }
@@ -62,9 +71,10 @@ map{ key = 'gV', cmd = '`[v`]' }
 
 -- Quick folding
 map{ key = '<leader>f', cmd = 'zf' }
+map{ key = '<leader>uf', cmd = 'zR' }
 
 -- Close current buffer
-map{ key = '<leader>q', cmd = ':bd<CR>' }
+map{ key = '<leader>q', cmd = '<C-w>c' }
 
 -- Copy/paste helpers
 map{ key = '<leader>y', cmd = '"*y' }
@@ -78,3 +88,6 @@ map{ mode = '', key = ',', cmd = ':let @/=""<CR>' }
 -- Open and close floating terminal
 map{ key = '<A-i>', cmd = '<CMD>lua require("FTerm").toggle()<CR>', options = { silent = true, noremap = true } }
 map{ mode = 't', key = '<A-i>', cmd = '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', options = { silent = true, noremap = true } }
+
+-- keymap for omnifunc completion
+map{ mode = 'i', key = '<C-c>', cmd = '<C-x><C-o>' }
