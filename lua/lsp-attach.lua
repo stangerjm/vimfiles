@@ -21,7 +21,8 @@ end
 function custom_attach.on_attach(client, bufnr)
     local buf_map = vim.api.nvim_buf_set_keymap
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    vim.cmd("command! LspDef lua require'telescope.builtin'.lsp_definitions{ jump_type = 'vsplit' }")
+    vim.cmd("command! LspDefSplit lua require'telescope.builtin'.lsp_definitions{ jump_type = 'vsplit' }")
+    vim.cmd("command! LspDef lua require'telescope.builtin'.lsp_definitions{}")
     vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
     vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
     vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
@@ -35,6 +36,7 @@ function custom_attach.on_attach(client, bufnr)
     vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 
     buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
+    buf_map(bufnr, "n", "gs", ":LspDefSplit<CR>", {silent = true})
     buf_map(bufnr, "n", "gr", ":LspRefs<CR>", {silent = true})
     buf_map(bufnr, "n", "gi", ":LspImplementation<CR>", {silent = true})
     buf_map(bufnr, "n", "gR", ":LspRename<CR>", {silent = true})
